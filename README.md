@@ -12,3 +12,33 @@ The database used for this project will be a minimally configured PostgreSQL RDS
 
 ## Data Model
 
+```
+    CREATE TABLE inventory_item (
+        item_id SERIAL PRIMARY KEY, 
+        name VARCHAR(100) NOT NULL,
+        quantity NUMERIC NOT NULL,
+        last_update DATE NOT NULL
+    );
+
+    CREATE TABLE shipment (
+        shipment_id SERIAL PRIMARY KEY,
+        ship_date DATE NOT NULL, 
+        destination VARCHAR(100)
+    );
+
+    CREATE TABLE shipment_items (
+        shipment_id INT REFERENCES shipment(shipment_id) ON UPDATE CASCADE ON DELETE CASCADE,
+        item_id INT REFERENCES inventory_item(item_id) ON UPDATE CASCADE,
+        quantity NUMERIC NOT NULL DEFAULT 1, 
+        PRIMARY KEY(shipment_id, item_id)
+    );
+```
+
+## Testing
+
+| Operation | Test Case | Expected Behaviour |
+| --- | --- | --- |
+| Create    | Create a new item that does not currently exist in database | Pass |
+| Read      |  |
+| Delete    | Delete a new item that exists in database | Pass |
+| Delete    | Delete 
