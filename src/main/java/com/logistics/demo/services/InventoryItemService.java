@@ -58,14 +58,14 @@ public class InventoryItemService extends Service{
         }
     }
 
-    public void updateInventoryItem(InventoryItem item) throws SQLException {
+    public void updateInventoryItem(int itemId, InventoryItem item) throws SQLException {
         try  {
             String itemQuery = "UPDATE inventory_items SET name = ?, quantity = ?, last_update = TO_DATE(?, 'YYYYMMDD') WHERE item_id = ?";
             PreparedStatement ps = this.dbHandler.getConnection().prepareStatement(itemQuery);
             ps.setString(1, item.getName());
             ps.setInt(2, item.getQuantity());
             ps.setString(3, item.getLastUpdated());
-            ps.setInt(4, item.getItemId());
+            ps.setInt(4, itemId);
             
             ps.executeUpdate();
             this.dbHandler.getConnection().commit();

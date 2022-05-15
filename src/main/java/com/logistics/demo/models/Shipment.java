@@ -7,19 +7,11 @@ public class Shipment {
     protected int shipmentId;
     protected String shipDate;
     protected String destination;
-    protected List<ShipmentItem> shipmentItems;
 
     public Shipment(int shipmentId, String ship_date, String destination) {
         this.shipmentId = shipmentId;
         this.shipDate = ship_date;
         this.destination = destination;
-    }
-
-    public Shipment(int shipmentId, String ship_date, String destination, List<ShipmentItem> shipmentItems) {
-        this.shipmentId = shipmentId;
-        this.shipDate = ship_date;
-        this.destination = destination;
-        this.shipmentItems = shipmentItems;
     }
 
     public int getShipmentId() {
@@ -45,13 +37,4 @@ public class Shipment {
     public void setShipDate(String shipDate) {
         this.shipDate = shipDate;
     }
-
-    public List<ShipmentItem> getShipmentItems() {
-        return this.shipmentItems;
-    }
-
-    public void setShipmentItems(List<ShipmentItem> shipmentItems) {
-        this.shipmentItems = shipmentItems;
-    }
-
 }

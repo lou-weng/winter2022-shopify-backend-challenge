@@ -29,39 +29,40 @@ public class InventoryItemController {
     public ResponseEntity<?> createInventoryItem(@RequestBody InventoryItem item) {
         try {
             inventoryItemService.createInventoryItem(item);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created a new inventory-item");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body("Successfully created a new inventory-item");
     }
 
     @GetMapping("/getAll")
     public ResponseEntity<?> getAllInventoryItems() {
         try {
             List<InventoryItem> items = inventoryItemService.getAllInventoryItems();
-            return new ResponseEntity<>(items, HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(items, HttpStatus.OK);
         } catch (SQLException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<?> updateInventoryItem(@RequestBody InventoryItem item) {
+    @PostMapping("/update/{itemId}")
+    public ResponseEntity<?> updateInventoryItem(@PathVariable int itemId, @RequestBody InventoryItem item) {
         try {
-            inventoryItemService.updateInventoryItem(item);
+            inventoryItemService.updateInventoryItem(itemId, item);
+            return ResponseEntity.status(HttpStatus.OK).body("Successfully updated a item with id: " + itemId);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Successfully updated a item with id: " + item.getItemId());
+        
     }
 
-    @PostMapping("/delete/{id}")
-    public ResponseEntity<?> deleteInventoryItem(@PathVariable int id) {
+    @PostMapping("/delete/{itemId}")
+    public ResponseEntity<?> deleteInventoryItem(@PathVariable int itemId) {
         try {
-            inventoryItemService.deleteInventoryItem(id);
+            inventoryItemService.deleteInventoryItem(itemId);
+            return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted a item with id: " + itemId);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Successfully deleted a item with id: " + id);
     }
 }
