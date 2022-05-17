@@ -45,5 +45,5 @@ public class InventoryItem {
     public void setLastUpdated(String lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
-
+    
 }

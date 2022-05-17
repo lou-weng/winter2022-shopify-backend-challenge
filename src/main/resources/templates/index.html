@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logistics App</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="main-container">
+        <h1> Logistics Application </h1>
+        <div class="container">
+            <h3>Inventory Items</h3>
+            
+            <div>
+                <div class="form-div">
+                    <button onclick="loadAllInventoryItems()">Get Inventory Items</button>
+                </div>
+                <div class="form-div">
+                    <label>Id</label>
+                    <input type="number" id="deleteItemId" name="quantity">
+                    <button onclick="deleteItemWithId()">Delete Item with Id</button>
+                </div>
+                <div class="form-div">
+                    <label>Id</label>
+                    <input id="createItemId"></input>
+                    <label>Name</label>
+                    <input id="createItemName"></input>
+                    <label>Quantity</label>
+                    <input id="createItemQuantity"></input>
+                    <label>Last Updated (YYYYMMDD)</label>
+                    <input id="createItemUpdate"></input>
+                    <br>
+                    <button onclick="createItem()">Create Item</button>
+                    <button onclick="updateItem()">Update Item</button>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th>Item Id</th>
+                    <th>Item Name</th>
+                    <th>Item Quantity</th>
+                    <th>Last Updated</th>
+                </tr>
+                <tbody id="itemTableBody"></tbody>
+            </table>
+        </div>
+
+        <div class="container">
+            <h3>Shipments</h3>
+            <div>
+                <div class="form-div">
+                    <button onclick="loadAllShipments()">Get Shipments</button>
+                </div>
+                <div class="form-div">
+                    <label>Id</label>
+                    <input type="number" id="deleteShipmentId" name="quantity">
+                    <button onclick="deleteShipmentWithId()">Delete Item with Id</button>
+                </div>
+                <div class="form-div">
+                    <label>Date (YYYYMMDD)</label>
+                    <input id="createShipmentDate"></input>
+                    <label>Destination</label>
+                    <input id="createDestination"></input>
+                    <br>
+                    <button onclick="createShipment()">Create Shipment</button>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th>Ship Id</th>
+                    <th>Ship Date</th>
+                    <th>Ship Destination</th>
+                </tr>
+                <tbody id="shipmentTableBody"></tbody>
+            </table>
+        </div>
+
+        <div class="container">
+            <h3>Shipment Items</h3>
+            <div>
+                <div class="form-div">
+                    <label>Shipment Id</label>
+                    <input type="number" id="getShipmentIdForItems" name="quantity">
+                    <button onclick="loadAllShipmentItems()">Get All Items in Shipment</button>
+                </div>
+                <div class="form-div">
+                    <label>Shipment Id</label>
+                    <input id="addShipmentId"></input>
+                    <label>Item Id</label>
+                    <input id="addItemId"></input>
+                    <label>Quantity</label>
+                    <input id="addItemQuantity"></input>
+                    <br>
+                    <button onclick="addItemToShipment()">Add Item to Shipment</button>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th>Item Id</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                </tr>
+                <tbody id="shipmentItemsTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

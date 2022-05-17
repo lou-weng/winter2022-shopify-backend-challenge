@@ -1,0 +1,30 @@
+.container {
+    border: solid 1px black;
+    border-radius:3%;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.main-container {
+    max-width: 70%;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+}
+
+table {
+    text-align: center;
+    margin:auto;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+tr, th {
+    border: solid 1px black;
+}
+
+.form-div {
+    padding: 5px;
+    margin: 5px;
+    background-color: lightgray
+}

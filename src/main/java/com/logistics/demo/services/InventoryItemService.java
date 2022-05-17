@@ -10,6 +10,11 @@ import com.logistics.demo.databaseConnectors.DatabaseConnectionHandler;
 import com.logistics.demo.models.InventoryItem;
 
 public class InventoryItemService extends Service{
+
+    private final String ITEM_ID = "item_id";
+    private final String NAME = "name";
+    private final String QUANTITY = "quantity";
+    private final String LAST_UPDATE = "last_update";
     
     public InventoryItemService(DatabaseConnectionHandler dbHandler) {
         super(dbHandler);
@@ -43,12 +48,36 @@ public class InventoryItemService extends Service{
 
             while (rs.next()) {
                 InventoryItem item = new InventoryItem(
-                    rs.getInt("item_id"),
-                    rs.getString("name"),
-                    rs.getInt("quantity"),
-                    rs.getString("last_update"));
+                    rs.getInt(ITEM_ID),
+                    rs.getString(NAME),
+                    rs.getInt(QUANTITY),
+                    rs.getString(LAST_UPDATE));
                 result.add(item);
             }
+
+            rs.close();
+            ps.close();
+            return result;
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+
+    public InventoryItem getInventoryItem(int itemId) throws SQLException {
+        try {
+            String itemQuery = "SELECT * FROM inventory_items AS i WHERE i.item_id = ?";
+            
+            PreparedStatement ps = this.dbHandler.getConnection().prepareStatement(itemQuery);
+            ps.setInt(1, itemId);
+            ResultSet rs = ps.executeQuery();
+
+            rs.next();
+            InventoryItem result = new InventoryItem(
+                rs.getInt(ITEM_ID),
+                rs.getString(NAME),
+                rs.getInt(QUANTITY),
+                rs.getString(LAST_UPDATE)
+            );
 
             rs.close();
             ps.close();
@@ -92,4 +121,33 @@ public class InventoryItemService extends Service{
             throw e;
         }
     }
+
+    public List<InventoryItem> getShipmentItems(int shipmentId) throws SQLException {
+        try {
+            ArrayList<InventoryItem> result = new ArrayList<>();
+            String shipmentQuery = "SELECT s.shipment_id, i.item_id, i.name, s.quantity " + 
+                                    "FROM inventory_items AS i, shipment_items AS s " + 
+                                    "WHERE i.item_id = s.item_id and s.shipment_id = ?";
+            PreparedStatement ps = this.dbHandler.getConnection().prepareStatement(shipmentQuery);
+            ps.setInt(1, shipmentId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                InventoryItem item = new InventoryItem(
+                    rs.getInt(ITEM_ID), 
+                    rs.getString(NAME),
+                    rs.getInt(QUANTITY),
+                    ""
+                );
+                result.add(item);
+            }
+
+            rs.close();
+            ps.close();
+            return result;
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+    
 }

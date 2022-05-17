@@ -45,6 +45,16 @@ public class InventoryItemController {
         }
     }
 
+    @GetMapping("/get/{shipmentId}")
+    public ResponseEntity<?> getInventoryItemsFromShipment(@PathVariable int shipmentId) {
+        try {
+            List<InventoryItem> items = inventoryItemService.getShipmentItems(shipmentId);
+            return new ResponseEntity<>(items, HttpStatus.OK);
+        } catch (SQLException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
     @PostMapping("/update/{itemId}")
     public ResponseEntity<?> updateInventoryItem(@PathVariable int itemId, @RequestBody InventoryItem item) {
         try {

@@ -37,4 +37,5 @@ public class Shipment {
     public void setShipDate(String shipDate) {
         this.shipDate = shipDate;
     }
+    
 }
