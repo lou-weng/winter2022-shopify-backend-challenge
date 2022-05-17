@@ -1,6 +1,6 @@
 const getAllInventoryItems = async () => {
     try {
-        const response = await fetch('http://localhost:8080/inventory-items/getAll', {
+        const response = await fetch('/inventory-items/getAll', {
             method: 'GET'
         });
         let inventoryItems =  await response.json();
@@ -16,7 +16,7 @@ async function deleteItemWithId() {
         document.getElementById("deleteItemId").value = ""
 
         console.log(itemId)
-        const response = await fetch(`http://localhost:8080/inventory-items/delete/${itemId}`, {
+        const response = await fetch(`/inventory-items/delete/${itemId}`, {
             method: 'POST',
         });
         console.log(await response)
@@ -38,7 +38,7 @@ async function createItem() {
         let itemUpdate = document.getElementById("createItemUpdate").value
         document.getElementById("createItemUpdate").value = ""
         
-        const response = await fetch(`http://localhost:8080/inventory-items/create`, {
+        const response = await fetch(`/inventory-items/create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -68,7 +68,7 @@ async function updateItem() {
         let itemUpdate = document.getElementById("createItemUpdate").value
         document.getElementById("createItemUpdate").value = ""
 
-        const response = await fetch(`http://localhost:8080/inventory-items/update/${itemId}`, {
+        const response = await fetch(`/inventory-items/update/${itemId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -111,7 +111,7 @@ async function loadAllInventoryItems() {
 
 const getAllShipmentItems = async () => {
     try {
-        const response = await fetch('http://localhost:8080/shipments/getAll', {
+        const response = await fetch('/shipments/getAll', {
             method: 'GET'
         });
         let shipmentItems =  await response.json();
@@ -147,7 +147,7 @@ async function deleteShipmentWithId() {
         let shipmentId = document.getElementById("deleteShipmentId").value
         document.getElementById("deleteShipmentId").value = ""
 
-        const response = await fetch(`http://localhost:8080/shipments/delete/${shipmentId}`, {
+        const response = await fetch(`/shipments/delete/${shipmentId}`, {
             method: 'POST',
         });
         console.log(await response)
@@ -165,7 +165,7 @@ async function createShipment() {
         let shipmentDest = document.getElementById("createDestination").value
         document.getElementById("createDestination").value = ""
         
-        const response = await fetch(`http://localhost:8080/shipments/create`, {
+        const response = await fetch(`/shipments/create`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -186,7 +186,7 @@ async function createShipment() {
 const getAllShipmentItemsInShipment = async () => {
     try {
         let shipmentId = document.getElementById("getShipmentIdForItems").value
-        const response = await fetch(`http://localhost:8080/inventory-items/get/${shipmentId}`, {
+        const response = await fetch(`/inventory-items/get/${shipmentId}`, {
             method: 'GET'
         });
         let inventoryItems =  await response.json();
@@ -226,7 +226,7 @@ async function addItemToShipment() {
         let quantity = document.getElementById("addItemQuantity").value
         document.getElementById("addItemQuantity").value = ""
         
-        const response = await fetch(`http://localhost:8080/shipments/addToShipment/${shipmentId}`, {
+        const response = await fetch(`/shipments/addToShipment/${shipmentId}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
