@@ -1,5 +1,7 @@
 # winter2022-shopify-backend-challenge
 
+# Note: RDS instance deactivated right now
+
 ## How to Run
 The entire project is runnable from a single jar file located in target. 
 
